@@ -1,0 +1,7 @@
+venv/
+test.py
+stockfish/
+screenshots_dataset/
+fen_dataset/
+generated_images/
+archives/

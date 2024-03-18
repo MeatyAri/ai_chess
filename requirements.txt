@@ -1,0 +1,10 @@
+numpy
+pillow
+opencv-python
+matplotlib
+ultralytics
+# install pytorch from https://pytorch.org/get-started/locally/
+stockfish
+pynput
+mss
+onnx

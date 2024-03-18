@@ -1,0 +1,7 @@
+path: /home/meaty/code/chess_ai/generated_images # root directory
+train: train/images
+val: eval/images
+
+# Classes dictionary
+names:
+  0: chess_board
