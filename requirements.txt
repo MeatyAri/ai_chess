@@ -8,3 +8,9 @@ stockfish
 pynput
 mss
 onnx
+onnxscript
+# to run on CPU
+# onnxruntime
+# to run on GPU
+onnxruntime-gpu
+tensorrt
