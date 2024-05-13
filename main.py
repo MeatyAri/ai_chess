@@ -218,7 +218,7 @@ def board_img_to_fen(board_image):
     board_image = img_processor.fen_transform(board_image).numpy()
     board_image = crop_image_into_squares(board_image)
 
-    outputs = fen_model_ort.run(None, {'l_x_': board_image})
+    outputs = fen_model_ort.run(None, {'arg0': board_image})
     predicted = np.argmax(outputs[0], 1)
     # _, predicted = torch.max(torch.tensor(outputs[0]), 1)
     
@@ -276,7 +276,7 @@ if __name__ == '__main__':
 
     yolo_model = YOLO('./yolo_models/yolov8n_chess_board.engine', task='detect')
 
-    fen_model_ort = ort.InferenceSession("./fen_models/best/fen_gen.onnx", providers=["CUDAExecutionProvider", "CPUExecutionProvider"])
+    fen_model_ort = ort.InferenceSession("./fen_models/best/100_epochs/fen_gen.onnx", providers=["CUDAExecutionProvider", "CPUExecutionProvider"])
 
     sct = mss()
 
