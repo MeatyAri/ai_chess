@@ -90,15 +90,27 @@ class MouseControls():
 
         return (x_cell, y_cell)
 
+    def drag_mouse(self, xy_prev, xy_new):
+        self.ms.position = xy_prev
+        self.ms.press(mouse.Button.left)
+        self.ms.position = xy_new
+        self.ms.release(mouse.Button.left)
+    
+    def click_mouse(self, xy_prev, xy_new):
+        self.ms.position = xy_prev
+        self.ms.click(mouse.Button.left)
+        self.ms.position = xy_new
+        self.ms.click(mouse.Button.left)
+
     def move(self, best_move, board_region):
         prev_cell, new_cell = self.best_move_to_cell_index(best_move)
         xy_prev = self.cell_to_pixel(prev_cell, board_region)
         xy_new = self.cell_to_pixel(new_cell, board_region)
 
-        self.ms.position = xy_prev
-        self.ms.click(mouse.Button.left)
-        self.ms.position = xy_new
-        self.ms.click(mouse.Button.left)
+        if args.click_cells:
+            self.click_mouse(xy_prev, xy_new)
+        else:
+            self.drag_mouse(xy_prev, xy_new)
         self.ms.position = (0, 0)
 
 
@@ -243,16 +255,18 @@ def main():
 
         # if detection is not none
         #   then crop the original frame and get the fen
-        if board_region is not None and kb.activate:
-            board_image = crop_to_board(frame, board_region)
-            fen = board_img_to_fen(board_image)
+        if board_region is None or not kb.activate:
+            continue
 
-            best_move = get_best_move(fen)
-            if best_move is not None:
-                print(best_move)
-                mv_mouse.move(best_move, board_region)
+        board_image = crop_to_board(frame, board_region)
+        fen = board_img_to_fen(board_image)
 
-            kb.activate = False
+        best_move = get_best_move(fen)
+        if best_move is not None:
+            print(best_move)
+            mv_mouse.move(best_move, board_region)
+
+        kb.activate = False
 
         fps_counter.update()
 
@@ -261,6 +275,8 @@ def get_args():
     parser = argparse.ArgumentParser()
 
     parser.add_argument("side", type=str, help="choose what side to play, b for black or w for white")
+
+    parser.add_argument("-c", "--click-cells", action="store_true", help="clicks rather than dragging the cells for compatibility")
 
     args = parser.parse_args()
 
