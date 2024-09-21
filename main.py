@@ -249,6 +249,7 @@ def main():
     while True:
         # take a screenshot
         frame = screen_capture()
+        fps_counter.update()
 
         # detect the board
         board_region = detect_board(frame)
@@ -267,8 +268,6 @@ def main():
             mv_mouse.move(best_move, board_region)
 
         kb.activate = False
-
-        fps_counter.update()
 
 
 def get_args():
