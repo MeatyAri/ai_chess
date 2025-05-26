@@ -289,7 +289,7 @@ if __name__ == '__main__':
 
     stockfish = Stockfish(path="./stockfish/stockfish-ubuntu-x86-64-avx2", depth=20, parameters={"Threads": 8, "Hash": 4096})
 
-    yolo_model = YOLO('./yolo_models/yolov8n_chess_board.engine', task='detect')
+    yolo_model = YOLO('./yolo_models/yolov8n_chess_board.onnx', task='detect')
 
     fen_model_ort = ort.InferenceSession("./fen_models/best/100_epochs/fen_gen.onnx", providers=["CUDAExecutionProvider", "CPUExecutionProvider"])
 

@@ -1,0 +1,21 @@
+[project]
+name = "chess-ai"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "matplotlib>=3.10.3",
+    "mss>=10.0.0",
+    "numpy>=2.2.6",
+    "onnx>=1.18.0",
+    "onnxruntime-gpu>=1.22.0",
+    "onnxscript>=0.2.6",
+    "opencv-python>=4.11.0.86",
+    "pillow>=11.2.1",
+    "pynput>=1.8.1",
+    "stockfish>=3.28.0",
+    "torch>=2.7.0",
+    "torchvision>=0.22.0",
+    "ultralytics>=8.3.145",
+]
